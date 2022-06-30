@@ -94,7 +94,7 @@ namespace Codeflix.Catalog.UnitTests.Domain.Entity.Category
 
             action.Should()
                 .Throw<EntityValidationException>()
-                .WithMessage("Description should not be empty or null");
+                .WithMessage("Description should not be null");
         }
 
         [Theory(DisplayName = nameof(InstantiateErrorWhenNameIsLess3Characters))]
@@ -109,7 +109,7 @@ namespace Codeflix.Catalog.UnitTests.Domain.Entity.Category
 
             action.Should()
               .Throw<EntityValidationException>()
-              .WithMessage("Name should be at leats 3 Characters");
+              .WithMessage("Name should be at leats 3 characteres long");
         }
 
         public static IEnumerable<object[]> GetNameIsLess3Characters(int numberOfTests = 6)
@@ -155,7 +155,7 @@ namespace Codeflix.Catalog.UnitTests.Domain.Entity.Category
 
             action.Should()
               .Throw<EntityValidationException>()
-              .WithMessage("Description should be less or equal 10_000 characters long");
+              .WithMessage("Description should be less or equal 10000 characters long");
         }
 
         [Fact(DisplayName = nameof(Activate))]
@@ -239,7 +239,7 @@ namespace Codeflix.Catalog.UnitTests.Domain.Entity.Category
                 () => category.Update(invalidName!);
 
             action.Should().Throw<EntityValidationException>()
-              .WithMessage("Name should be at leats 3 Characters");
+              .WithMessage("Name should be at leats 3 characteres long");
         }
 
         [Fact(DisplayName = nameof(UpdateErrorWhenNameIsGreaterThan255Characters))]
@@ -267,7 +267,7 @@ namespace Codeflix.Catalog.UnitTests.Domain.Entity.Category
                 () => category.Update("category name", invalidDescription);
 
             action.Should().Throw<EntityValidationException>()
-              .WithMessage("Description should be less or equal 10_000 characters long");
+              .WithMessage("Description should be less or equal 10000 characters long");
         }
     }
 }
