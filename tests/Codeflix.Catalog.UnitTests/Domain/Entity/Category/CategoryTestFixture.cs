@@ -8,6 +8,9 @@ namespace Codeflix.Catalog.UnitTests.Domain.Entity.Category
     {
         public CategoryTestFixture() : base() { }
 
+        [CollectionDefinition(nameof(CategoryTestFixture))]
+        public class CategoryTestFixtureCollection : ICollectionFixture<CategoryTestFixture> { }
+
         //garantir que o name atenda as regras 
         public string GetValidCategoryName()
         {
@@ -36,7 +39,4 @@ namespace Codeflix.Catalog.UnitTests.Domain.Entity.Category
         public DomainEntity.Category GetValidCategory()
             => new(GetValidCategoryName(), GetValidCategoryDescription());
     }
-
-    [CollectionDefinition(nameof(CategoryTestFixture))]
-    public class CategoryTestFixtureCollection : ICollectionFixture<CategoryTestFixture> { }
 }
