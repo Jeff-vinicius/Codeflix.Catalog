@@ -29,4 +29,8 @@
     <ProjectReference Include="..\..\src\Codeflix.Catalog.Domain\Codeflix.Catalog.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Codeflix\Catalog\UnitTests\Common\" />
+  </ItemGroup>
+
 </Project>

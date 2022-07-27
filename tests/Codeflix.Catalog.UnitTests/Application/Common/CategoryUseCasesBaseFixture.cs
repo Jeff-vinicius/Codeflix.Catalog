@@ -1,17 +1,17 @@
-﻿using Codeflix.Catalog.Domain.Entity;
+﻿using Codeflix.Catalog.Application.Interfaces;
+using Codeflix.Catalog.Domain.Entity;
 using Codeflix.Catalog.Domain.Repository;
 using Codeflix.Catalog.UnitTests.Common;
 using Moq;
-using Xunit;
 
-namespace Codeflix.Catalog.UnitTests.Application.GetCategory
+namespace Codeflix.Catalog.UnitTests.Application.Common
 {
-    [CollectionDefinition(nameof(GetCategoryTestFixture))]
-    public class GetCategoryTestFixtureCollection : ICollectionFixture<GetCategoryTestFixture> { }
-
-    public class GetCategoryTestFixture : BaseFixture
+    public abstract class CategoryUseCasesBaseFixture : BaseFixture
     {
         public Mock<ICategoryRepository> GetRepositoryMock()
+        => new();
+
+        public Mock<IUnitOfWork> GetUnitOfWorkMock()
             => new();
 
         public string GetValidCategoryName()
@@ -26,7 +26,7 @@ namespace Codeflix.Catalog.UnitTests.Application.GetCategory
 
             return categoryName;
         }
- 
+
         public string GetValidCategoryDescription()
         {
             var categoryDescription = Faker.Commerce.ProductDescription();
@@ -37,7 +37,10 @@ namespace Codeflix.Catalog.UnitTests.Application.GetCategory
             return categoryDescription;
         }
 
-        public Category GetValidCategory()
-            => new(GetValidCategoryName(), GetValidCategoryDescription());
+        public bool GetRandomBoolean()
+            => (new Random()).NextDouble() < 0.5;
+
+        public Category GetExampleCategory()
+          => new(GetValidCategoryName(), GetValidCategoryDescription(), GetRandomBoolean());
     }
 }

@@ -21,7 +21,7 @@ namespace Codeflix.Catalog.UnitTests.Application.GetCategory
         public async Task GetCategory()
         {
             var repositoryMock = _fixture.GetRepositoryMock();
-            var exempleCategory = _fixture.GetValidCategory();
+            var exempleCategory = _fixture.GetExampleCategory();
             repositoryMock.Setup(x => x.Get(It.IsAny<Guid>(), It.IsAny<CancellationToken>())).ReturnsAsync(exempleCategory);
             var input = new UseCase.GetCategoryInput(exempleCategory.Id);
             var useCase = new UseCase.GetCategory(repositoryMock.Object);

@@ -22,7 +22,7 @@ namespace Codeflix.Catalog.UnitTests.Application.DeleteCategory
         {
             var repositoryMock = _fixture.GetRepositoryMock();
             var unitOfWorkMock = _fixture.GetUnitOfWorkMock();
-            var categoryExample = _fixture.GetValidCategory();
+            var categoryExample = _fixture.GetExampleCategory();
             repositoryMock.Setup(x => x.Get(categoryExample.Id, It.IsAny<CancellationToken>())).ReturnsAsync(categoryExample);
             var input = new UseCase.DeleteCategoryInput(categoryExample.Id);
             var useCase = new UseCase.DeleteCategory(repositoryMock.Object, unitOfWorkMock.Object);
