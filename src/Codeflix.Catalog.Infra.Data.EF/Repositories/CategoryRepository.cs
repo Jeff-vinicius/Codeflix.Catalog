@@ -32,9 +32,16 @@ namespace Codeflix.Catalog.Infra.Data.EF.Repositories
         public Task Delete(Category aggregate, CancellationToken cancellationToken)
            => Task.FromResult(_categories.Remove(aggregate));
 
-        public Task<SearchOutput<Category>> Search(SearchInput input, CancellationToken cancellationToken)
+        public async Task<SearchOutput<Category>> Search(SearchInput input, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var toSkip = (input.Page - 1) * input.PerPage;
+            var query = _categories.AsNoTracking();
+            if (!string.IsNullOrWhiteSpace(input.Search))
+                query = query.Where(x => x.Name.Contains(input.Search));
+
+            var total = await query.CountAsync();
+            var itemns = await query.Skip(toSkip).Take(input.PerPage).ToListAsync();
+            return new(input.Page, input.PerPage, total, itemns);
         }
     }
 }

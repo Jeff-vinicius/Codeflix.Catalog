@@ -43,8 +43,21 @@ namespace Codeflix.Catalog.IntegrationTests.Infra.Data.EF.Repositories.CategoryR
         public List<Category> GetExampleCategoriesList(int length = 10)
           => Enumerable.Range(1, length).Select(_ => GetExampleCategory()).ToList();
 
-        public CodeflixCatalogDbContext CreateDbContext()
-           => new(new DbContextOptionsBuilder<CodeflixCatalogDbContext>()
+        public List<Category> GetExampleCategoriesListWithNames(List<string> names)
+         => names.Select(name =>
+         {
+             var category = GetExampleCategory();
+             category.Update(name);
+             return category;
+         }).ToList();
+
+        public CodeflixCatalogDbContext CreateDbContext(bool preserveData = false)
+        {
+            var context =  new CodeflixCatalogDbContext(new DbContextOptionsBuilder<CodeflixCatalogDbContext>()
                 .UseInMemoryDatabase("integration-tests-db").Options);
+            if (!preserveData)
+                context.Database.EnsureDeleted();
+            return context;
+        }
     }
 }
