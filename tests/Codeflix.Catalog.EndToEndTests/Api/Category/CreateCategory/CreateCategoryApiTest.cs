@@ -20,7 +20,7 @@ namespace Codeflix.Catalog.EndToEndTests.Api.Category.CreateCategory
         }
 
         [Fact(DisplayName = nameof(CreateCategory))]
-        [Trait("EndToEnd/API", "Category - Endpoints")]
+        [Trait("EndToEnd/API", "Category/Create - Endpoints")]
         public async Task CreateCategory()
         {
             var input = _fixture.GetExampleInput();
