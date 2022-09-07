@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
+﻿using Codeflix.Catalog.Api.Configurations.Policies;
+using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Json;
 
@@ -12,11 +13,11 @@ namespace Codeflix.Catalog.EndToEndTests.Base
         public ApiClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            //_defaultSerializeOptions = new JsonSerializerOptions
-            //{
-            //    PropertyNamingPolicy = new JsonSnakeCasePolicy(),
-            //    PropertyNameCaseInsensitive = true
-            //};
+            _defaultSerializeOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = new JsonSnakeCasePolicy(),
+                PropertyNameCaseInsensitive = true
+            };
         }
 
         public async Task<(HttpResponseMessage?, TOutput?)> Post<TOutput>(string route, object payload) where TOutput : class
